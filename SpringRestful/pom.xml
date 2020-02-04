@@ -13,7 +13,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>rest</module>
-        <module>sign2Github</module>
     </modules>
     <artifactId>SpringRestful</artifactId>
 
