@@ -10,3 +10,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
+
+  redis:
+    host: 192.168.30.102
+    port: 6379
