@@ -12,6 +12,7 @@
         <module>SpringCore</module>
         <module>SpringData</module>
         <module>SpringSecurity</module>
+        <module>SpringRestful</module>
     </modules>
 
     <parent>
