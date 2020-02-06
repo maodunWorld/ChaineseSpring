@@ -13,6 +13,11 @@
         <module>SpringData</module>
         <module>SpringSecurity</module>
         <module>SpringRestful</module>
+        <module>SSM</module>
+        <module>SpringTest</module>
+        <module>SpringDataAcess</module>
+        <module>SpringMVC</module>
+        <module>SpringJavaEE</module>
     </modules>
 
     <parent>
@@ -42,6 +47,5 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 </project>
