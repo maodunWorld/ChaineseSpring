@@ -18,6 +18,7 @@
         <module>SpringDataAcess</module>
         <module>SpringMVC</module>
         <module>SpringJavaEE</module>
+        <module>Hibernate</module>
     </modules>
 
     <parent>
