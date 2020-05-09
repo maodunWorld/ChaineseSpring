@@ -12,13 +12,7 @@
         <module>SpringCore</module>
         <module>SpringData</module>
         <module>SpringSecurity</module>
-        <module>SpringRestful</module>
-        <module>SSM</module>
         <module>SpringTest</module>
-        <module>SpringDataAcess</module>
-        <module>SpringMVC</module>
-        <module>SpringJavaEE</module>
-        <module>Hibernate</module>
     </modules>
 
     <parent>
