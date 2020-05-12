@@ -1,0 +1,9 @@
+server:
+  port: 8081
+
+spring:
+  data:
+    mongodb:
+      uri:
+      auto-index-creation: true
+      field-naming-strategy:
