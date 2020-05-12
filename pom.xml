@@ -12,6 +12,7 @@
         <module>SpringCore</module>
         <module>SpringData</module>
         <module>SpringTest</module>
+        <module>spring-boot-mongo-crud</module>
     </modules>
 
     <parent>
