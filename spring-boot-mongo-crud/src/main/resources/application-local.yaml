@@ -1,9 +1,23 @@
 server:
   port: 8081
 
+
+# mongo配置
 spring:
   data:
     mongodb:
-      uri:
-      auto-index-creation: true
-      field-naming-strategy:
+      uri: mongodb://192.168.15.102:27017
+      database: myDB
+      username: admin
+      password: 123456
+
+      field-naming-strategy: org.springframework.data.mapping.model.SnakeCaseFieldNamingStrategy # 字段映射关系， 如TestDoc映射为testDod表，creatorId映射为creator_id
+      # authentication-database: 认证服务器地址
+      # grid-fs-database: grid-fs地址
+      auto-index-creation: on #自动创建索引
+
+
+  jackson:
+    # 时区，字符串格式化
+    time-zone: GMT+8
+    date-format: "yyyy-MM-dd HH:mm:ss"
