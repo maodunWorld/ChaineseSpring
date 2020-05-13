@@ -38,6 +38,16 @@ public class CRUDController {
     @Autowired
     private ObjectMapper objectMapper;
 
+    // Create
+    @PutMapping("/testdoc")
+    public ResponseEntity create(@RequestBody TestDoc testDoc) {
+        log.info("--PUTING--" + testDoc);
+        TestDoc insert = testDocDao.save(testDoc);
+        log.info("--AFTER PUTING--" + insert);
+        return ResponseEntity.ok(insert);
+    }
+
+
     @PutMapping("/randomone")
     public ResponseEntity createRandomOne() {
         TestDoc testDoc = new TestDoc();
@@ -58,10 +68,11 @@ public class CRUDController {
         if (result != null) {
             return ResponseEntity.ok("OK");
         } else {
-            return ResponseEntity.badRequest().body("FAILT");
+            return ResponseEntity.badRequest().body("FAIL");
         }
     }
 
+    // retrieve
     @GetMapping("/testdoc/p{pageIndex}")
     public ResponseEntity retrievePage(@PathVariable Integer pageIndex) {
         log.info(" -----  " + pageIndex + " -----");
@@ -71,13 +82,6 @@ public class CRUDController {
         return ResponseEntity.ok().body(all.getContent());
     }
 
-    @PutMapping("/testdoc")
-    public ResponseEntity create(@RequestBody TestDoc testDoc) {
-        log.info("--PUTING--" + testDoc);
-        TestDoc insert = testDocDao.save(testDoc);
-        log.info("--AFTER PUTING--" + insert);
-        return ResponseEntity.ok(insert);
-    }
 
     @DeleteMapping("/testdoc")
     public ResponseEntity delete(@RequestBody TestDoc testDoc) {

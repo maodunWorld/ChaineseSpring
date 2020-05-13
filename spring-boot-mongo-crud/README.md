@@ -4,7 +4,7 @@
 
 
 
-## Mongo 
+## Mongo 关于MongRepositry
 ### 不用建表，先配置YAML文件
 ```yaml
 # mongo配置
@@ -95,4 +95,25 @@ Content-type application/json
 
 * [MongoRepository Save和Insert的区别](https://www.cnblogs.com/lanqi/p/8535390.html)   
 Save追踪_id主键，并进行已有_id的文档更新，如果没有则插入，而Insert不会执行更新，直接报错。
-### 尝试
+### Retrieve 操作
+* 精准查询
+```java
+Optional<List<TestDoc>> findByCreatorIdIs(String creatorId);
+Optional<TestDoc> findByDocCodeIs(String docCode);
+Optional<List<TestDoc>> findByCreatorIdIsOrDocTextIs(String creatorId, String docText);
+```
+方法名套是 findBy(某某字段)(Is或者In或者IS_NULL等判断逻辑)(And或者Or等逻辑)(某某字段)(Is或者In或者IS_NULL等判断逻辑),[更多方法逻辑名字](https://docs.spring.io/spring-data/mongodb/docs/2.2.7.RELEASE/reference/html/#repository-query-keywords)
+,英文的字面意思，如果你是用IDEA商业版，你将获得许多提示。com.maodun.mongo.dao.TestDocDaoTest单元测试结果如下。
+![](.README_images/f80f94ea.png)
+![](.README_images/05f6dea3.png)
+
+* 模糊搜索
+
+* 结果排序
+
+* 分页查询
+
+* 原生MongoShell Json查询
+
+
+* 聚合查询

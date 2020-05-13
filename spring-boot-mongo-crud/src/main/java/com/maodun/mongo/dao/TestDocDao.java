@@ -4,6 +4,9 @@ import com.maodun.mongo.pojo.TestDoc;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
 /**
  * @author maodunWorld
  * @version 1.0
@@ -14,4 +17,9 @@ import org.springframework.stereotype.Repository;
 //指定TestDoc的Pojo，和String的主键
 @Repository
 public interface TestDocDao extends MongoRepository<TestDoc, String> {
+    Optional<List<TestDoc>> findByCreatorIdIs(String creatorId);
+
+    Optional<TestDoc> findByDocCodeIs(String docCode);
+
+    Optional<List<TestDoc>> findByCreatorIdIsOrDocTextIs(String creatorId, String docText);
 }
