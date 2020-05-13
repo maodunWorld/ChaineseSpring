@@ -150,7 +150,23 @@ TODO
 TODO    
 
 ### Update 
+```java
 
+  @Test
+    public void updateTest() {
+        TestDoc testDoc = new TestDoc();
+//注意，一定要传id字段
+        Optional<TestDoc> byId = testDocDao.findById("5eba874e86b84e3199b227da");
+        if (byId.isPresent()) {
+            TestDoc testDoc1 = byId.get();
+            BeanUtils.copyProperties(testDoc1, testDoc);
+            testDoc.setDocCode("update a docCode3");
+        }
+        TestDoc save = testDocDao.save(testDoc);
+        System.out.println(save);
+        Assertions.assertNotNull(save);
+    }
+```
 
 ### DELETE操作
 * 通过_id删除
