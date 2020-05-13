@@ -31,7 +31,7 @@ public class CRUDController {
 //    @Autowired
 //    private TransactionTemplate transactionTemplate;
 
-    @GetMapping("/add_randomone")
+    @PutMapping("/randomone")
     public ResponseEntity addRandomOne() {
         TestDoc testDoc = new TestDoc();
         Date time = new Date();
@@ -43,8 +43,8 @@ public class CRUDController {
         return ResponseEntity.ok("ok");
     }
 
-    @GetMapping("/get_page/{pageIndex}")
-    public ResponseEntity getPage(@PathVariable Integer pageIndex) {
+    @GetMapping("/testdoc/p{pageIndex}")
+    public ResponseEntity retrievePage(@PathVariable Integer pageIndex) {
         log.info(" -----  " + pageIndex + " -----");
         Sort create_time = Sort.by(Sort.Direction.ASC, "create_time");
         Page<TestDoc> all = testDocDao.findAll(PageRequest.of(pageIndex, 5, create_time));
@@ -52,9 +52,19 @@ public class CRUDController {
         return ResponseEntity.ok().body(all.getContent());
     }
 
-    @PutMapping("/add_one")
-    public ResponseEntity addOne(@RequestBody TestDoc testDoc) {
+    @PutMapping("/tesdoc")
+    public ResponseEntity create(@RequestBody TestDoc testDoc) {
         TestDoc insert = testDocDao.insert(testDoc);
         return ResponseEntity.ok(insert);
+    }
+
+    @DeleteMapping("/testdoc")
+    public ResponseEntity delete(@RequestBody TestDoc testDoc) {
+        return null;
+    }
+
+    @PatchMapping
+    public ResponseEntity update(@RequestBody TestDoc testDoc) {
+        return null;
     }
 }
