@@ -1,6 +1,8 @@
 package com.maodun.mongo.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
 import com.maodun.mongo.dao.TestDocDao;
 import com.maodun.mongo.pojo.TestDoc;
 import com.maodun.mongo.service.TestDocService;
@@ -13,10 +15,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
- * @author tongjian
+ * @author maodunWorld
  * @version 1.0
  * @date 2020/5/12 16:14
  */
@@ -47,9 +50,16 @@ public class CRUDController {
         return ResponseEntity.ok("ok");
     }
 
-    @PutMapping("/multiple_create")
-    public ResponseEntity createMulti(@RequestBody String multipleJson) {
-        return null;
+    @PutMapping("/multi-create")
+    public ResponseEntity createMulti(@RequestBody String multipleJson) throws JsonProcessingException {
+        CollectionType collectionType = objectMapper.getTypeFactory().constructCollectionType(List.class, TestDoc.class);
+        List<TestDoc> testDocs = (List<TestDoc>) objectMapper.readValue(multipleJson, collectionType);
+        List<TestDoc> result = testDocDao.insert(testDocs);
+        if (result != null) {
+            return ResponseEntity.ok("OK");
+        } else {
+            return ResponseEntity.badRequest().body("FAILT");
+        }
     }
 
     @GetMapping("/testdoc/p{pageIndex}")
@@ -61,9 +71,11 @@ public class CRUDController {
         return ResponseEntity.ok().body(all.getContent());
     }
 
-    @PutMapping("/tesdoc")
+    @PutMapping("/testdoc")
     public ResponseEntity create(@RequestBody TestDoc testDoc) {
-        TestDoc insert = testDocDao.insert(testDoc);
+        log.info("--PUTING--" + testDoc);
+        TestDoc insert = testDocDao.save(testDoc);
+        log.info("--AFTER PUTING--" + insert);
         return ResponseEntity.ok(insert);
     }
 
@@ -72,7 +84,7 @@ public class CRUDController {
         return null;
     }
 
-    @PatchMapping
+    @PatchMapping("/testdoc")
     public ResponseEntity update(@RequestBody TestDoc testDoc) {
         return null;
     }

@@ -29,7 +29,7 @@ spring:
 参考代码,SpringData将根据Pojo自动生成对应Mongo表，无须手动建表。
 
 ### Create操作
-插入一个字段
+* 插入一个字段
 ```java
 TestDoc testDoc = new TestDoc();
 Date time = new Date();
@@ -39,4 +39,60 @@ testDoc.setDocCode(UUID.randomUUID().toString());
 testDoc.setDocText(UUID.randomUUID().toString());
 testDocDao.insert(testDoc);
 ```
+* 测试索引是否生效 （docCode是已经存在于表中字段），结果是生效的。   
+postman header   
+```text
+Content-type application/json
+```
+模拟数据   
+```json
+{
+	"docCode" : "ad45e22b-67f4-4276-8830-ae5ea0a0e7ce",
+	"docText": "maodunNumberOne"
+}
+```
+![](.README_images/521cadcb.png)
+![](.README_images/babbad58.png)
+
+* 插入多个Pojo （通过）    
+模拟数据   
+```json
+[
+    {
+        "docCode": "mock1",
+        "docText": "mockText",
+        "creatorId": "maodun"
+    },
+    {
+        "docCode": "mock2",
+        "docText": "mockText",
+        "creatorId": "maodun"
+    },
+    {
+        "docCode": "mock3",
+        "docText": "mockText",
+        "creatorId": "maodun"
+    }
+]
+```
+
+```java
+    @PutMapping("/multi-create")
+    public ResponseEntity createMulti(@RequestBody String multipleJson) throws JsonProcessingException {
+        CollectionType collectionType = objectMapper.getTypeFactory().constructCollectionType(List.class, TestDoc.class);
+        List<TestDoc> testDocs = (List<TestDoc>) objectMapper.readValue(multipleJson, collectionType);
+        List<TestDoc> result = testDocDao.insert(testDocs);
+        if (result != null) {
+            return ResponseEntity.ok("OK");
+        } else {
+            return ResponseEntity.badRequest().body("FAILT");
+        }
+    }
+```
+![](.README_images/20c6255e.png)
+![](.README_images/0b2e2af3.png)  
+
+
+* [MongoRepository Save和Insert的区别](https://www.cnblogs.com/lanqi/p/8535390.html)   
+Save追踪_id主键，并进行已有_id的文档更新，如果没有则插入，而Insert不会执行更新，直接报错。
 ### 尝试
