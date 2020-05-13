@@ -178,7 +178,9 @@ long deleteByDocCodeIs(String docCode);
 
 ### 事务
 Mongo需要4.0以上, mongoDB单个实例不支持事务，副本集才支持事务。
-
+```java
+Sessions are not supported by the MongoDB cluster to which this client is connected 通常为单机Mongo，不支持事务。
+```
 #### 事务资料，文章
  - [Mongo事务](https://blog.csdn.net/ssehs/article/details/105301345)。
  - https://www.jianshu.com/p/7e8f0f437cd0
