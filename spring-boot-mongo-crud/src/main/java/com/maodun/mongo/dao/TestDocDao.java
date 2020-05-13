@@ -31,4 +31,9 @@ public interface TestDocDao extends MongoRepository<TestDoc, String> {
     Optional<List<TestDoc>> findByCreatorIdIs(String creatorId, Sort sort);
 
     Page<TestDoc> findByCreatorIdIs(String creatorId, Pageable pageable);
+
+    long deleteByIdIs(String id);
+
+    long deleteByDocCodeIs(String docCode);
+
 }

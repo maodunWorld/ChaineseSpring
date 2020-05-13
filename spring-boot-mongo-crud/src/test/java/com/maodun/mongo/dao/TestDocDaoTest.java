@@ -3,6 +3,7 @@ package com.maodun.mongo.dao;
 import com.maodun.mongo.pojo.TestDoc;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.data.domain.Page;
@@ -19,7 +20,8 @@ import java.util.Optional;
  */
 @DataMongoTest
 class TestDocDaoTest {
-    public static final String EXIST_DOC_CODE = "584f737b-2af0-4763-9bf1-a348c4d321e8";
+    public static final String EXIST_DOC_CODE = "9a4a6cad-db29-41f9-a139-c4cc6f054168";
+    public static final String EXIST_ID = "5ebb5a425191152a939d914e";
     @Autowired
     private TestDocDao testDocDao;
 
@@ -76,4 +78,34 @@ class TestDocDaoTest {
         Assertions.assertEquals(5, page.getContent().size());
     }
 
+    @Test
+    public void updateTest() {
+        TestDoc testDoc = new TestDoc();
+        Optional<TestDoc> byId = testDocDao.findById("5eba874e86b84e3199b227da");
+        if (byId.isPresent()) {
+            TestDoc testDoc1 = byId.get();
+            BeanUtils.copyProperties(testDoc1, testDoc);
+            testDoc.setDocCode("update a docCode3");
+        }
+        TestDoc save = testDocDao.save(testDoc);
+        System.out.println(save);
+        Assertions.assertNotNull(save);
+    }
+
+    @Test
+    public void deleteByIdIsTest() {
+        long b = testDocDao.deleteByIdIs(EXIST_ID);
+        // b=1 代表删除成功， b=0代表删除失败
+        System.out.println(b);
+        Optional<TestDoc> byId = testDocDao.findById(EXIST_ID);
+        Assertions.assertFalse(byId.isPresent());
+    }
+
+    @Test
+    public void deleteByDocCodeIs() {
+        long l = testDocDao.deleteByDocCodeIs(EXIST_DOC_CODE);
+        Assertions.assertEquals(1l, l);
+    }
+
+    ;
 }

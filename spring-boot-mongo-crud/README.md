@@ -147,4 +147,18 @@ Optional<List<TestDoc>> findByCreatorIdIs(String creatorId, Sort sort);
 TODO 
 
 * 聚合查询
-TODO
+TODO    
+
+### Update 
+
+
+### DELETE操作
+* 通过_id删除
+```java
+
+   
+    long deleteByIdIs(String id);
+
+    long deleteByDocCodeIs(String docCode);
+
+```
