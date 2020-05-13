@@ -12,7 +12,7 @@
         <module>spring-boot-mongo-crud</module>
         <module>spring-boot-kafka</module>
         <module>spring-boot-RabbitMQ</module>
-        <module>spring-boot-redis-curd</module>
+        <module>spring-boot-redis-crud</module>
         <module>spring-boot-mysql-curd</module>
         <module>spring-boot-actuator</module>
     </modules>
