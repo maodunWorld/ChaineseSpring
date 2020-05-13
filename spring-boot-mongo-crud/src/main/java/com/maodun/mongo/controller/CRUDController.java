@@ -32,8 +32,6 @@ public class CRUDController {
 
     @Autowired
     private TestDocDao testDocDao;
-//    @Autowired
-//    private TransactionTemplate transactionTemplate;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -56,7 +54,8 @@ public class CRUDController {
         testDoc.setCreatorId("maodun");
         testDoc.setDocCode(UUID.randomUUID().toString());
         testDoc.setDocText(UUID.randomUUID().toString());
-        testDocDao.insert(testDoc);
+        TestDoc insert = testDocDao.insert(testDoc);
+        log.info(insert.toString());
         return ResponseEntity.ok("ok");
     }
 
@@ -91,5 +90,11 @@ public class CRUDController {
     @PatchMapping("/testdoc")
     public ResponseEntity update(@RequestBody TestDoc testDoc) {
         return null;
+    }
+
+    @DeleteMapping("/transaction")
+    public ResponseEntity transactionTest(@RequestBody TestDoc testDoc) {
+        long result = testDocService.deleteOne(testDoc.getId());
+        return ResponseEntity.ok(result);
     }
 }

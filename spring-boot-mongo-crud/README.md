@@ -172,10 +172,39 @@ TODO
 ### DELETE操作
 * 通过_id删除
 ```java
+long deleteByIdIs(String id);
+long deleteByDocCodeIs(String docCode);
+```
 
-   
-    long deleteByIdIs(String id);
+### 事务
+Mongo需要4.0以上, mongoDB单个实例不支持事务，副本集才支持事务。
 
-    long deleteByDocCodeIs(String docCode);
+#### 事务资料，文章
+ - [Mongo事务](https://blog.csdn.net/ssehs/article/details/105301345)。
+ - https://www.jianshu.com/p/7e8f0f437cd0
+```text
+# 查看Mongo版本
+docker 进入容器 docker exec -it 容器标识 /bin/bash
+mongod --version
+```
+配置事务管理器
+```java
+@Configuration
+public class MongoConf  {
+    @Bean
+    public MongoTransactionManager transactionManager(MongoDbFactory dbFactory) {
+        return new MongoTransactionManager(dbFactory);
+    }
+}
 
+```
+使用注解完成事务管理。
+```java
+  @Transactional(rollbackFor = Exception.class)
+    public Long deleteOne(String id) {
+        long l = testDocDao.deleteByIdIs(id);
+        log.info(" -----------------delete id :{} ----result is :{}" + id + " result " + l);
+        int i = 1 / 0;
+        return l;
+    }
 ```
