@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 import java.util.List;
@@ -61,6 +63,17 @@ class TestDocDaoTest {
         System.out.println("--- ------ -----");
         asc.get().forEach(System.out::println);
 
+    }
+
+    @Test
+    public void findByCreatorIdIsPageTest() {
+
+        Page<TestDoc> page = testDocDao.findByCreatorIdIs("maodun", PageRequest.of(0, 5));
+        //分页并排序
+        Page<TestDoc> pageAndSort = testDocDao.findByCreatorIdIs("maodun", PageRequest.of(0, 5, Sort.by(Sort.Direction.ASC, "create_time")));
+        page.getContent().forEach(System.out::println);
+
+        Assertions.assertEquals(5, page.getContent().size());
     }
 
 }

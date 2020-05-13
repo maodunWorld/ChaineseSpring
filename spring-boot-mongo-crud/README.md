@@ -132,13 +132,19 @@ public interface PersonRepository extends MongoRepository<Person, String> {
 }
 ```
 ```java
-   Optional<List<TestDoc>> findByCreatorIdIs(String creatorId, Sort sort);
+//我们选择第二种方法
+Optional<List<TestDoc>> findByCreatorIdIs(String creatorId, Sort sort);
 ```
 单元测试结果，顺序相反。
 ![](.README_images/bde6e49b.png)
 * 分页查询
+```java
+ Page<TestDoc> findByCreatorIdIs(String creatorId, Pageable pageable);
+```
+详情请看单元测试
 
 * 原生MongoShell Json查询
-
+TODO 
 
 * 聚合查询
+TODO
