@@ -29,4 +29,14 @@ spring:
 参考代码,SpringData将根据Pojo自动生成对应Mongo表，无须手动建表。
 
 ### Create操作
-
+插入一个字段
+```java
+TestDoc testDoc = new TestDoc();
+Date time = new Date();
+testDoc.setCreateTime(time);
+testDoc.setCreatorId("maodun");
+testDoc.setDocCode(UUID.randomUUID().toString());
+testDoc.setDocText(UUID.randomUUID().toString());
+testDocDao.insert(testDoc);
+```
+### 尝试

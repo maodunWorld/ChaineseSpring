@@ -1,5 +1,6 @@
 package com.maodun.mongo.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maodun.mongo.dao.TestDocDao;
 import com.maodun.mongo.pojo.TestDoc;
 import com.maodun.mongo.service.TestDocService;
@@ -31,16 +32,24 @@ public class CRUDController {
 //    @Autowired
 //    private TransactionTemplate transactionTemplate;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @PutMapping("/randomone")
-    public ResponseEntity addRandomOne() {
+    public ResponseEntity createRandomOne() {
         TestDoc testDoc = new TestDoc();
         Date time = new Date();
         testDoc.setCreateTime(time);
         testDoc.setCreatorId("maodun");
         testDoc.setDocCode(UUID.randomUUID().toString());
         testDoc.setDocText(UUID.randomUUID().toString());
-        testDocService.create(testDoc);
+        testDocDao.insert(testDoc);
         return ResponseEntity.ok("ok");
+    }
+
+    @PutMapping("/multiple_create")
+    public ResponseEntity createMulti(@RequestBody String multipleJson) {
+        return null;
     }
 
     @GetMapping("/testdoc/p{pageIndex}")
