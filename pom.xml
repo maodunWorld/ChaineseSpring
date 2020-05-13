@@ -15,6 +15,8 @@
         <module>spring-boot-redis-crud</module>
         <module>spring-boot-mysql-curd</module>
         <module>spring-boot-actuator</module>
+        <module>spring-boot-protobuf</module>
+        <module>spring-boot-elasticsearch</module>
     </modules>
 
     <parent>
