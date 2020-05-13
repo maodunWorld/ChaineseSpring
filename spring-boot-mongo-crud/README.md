@@ -1,9 +1,4 @@
 # SpringBoot整合Mongo，整合内嵌Mongo
-
-## 内嵌 Mongo 用于单元测试
-
-
-
 ## Mongo 关于MongRepositry
 ### 不用建表，先配置YAML文件
 ```yaml
