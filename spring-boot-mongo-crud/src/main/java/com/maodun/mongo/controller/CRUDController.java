@@ -92,6 +92,11 @@ public class CRUDController {
         return null;
     }
 
+    /**
+     * 需要再Mongo4.0集群上，才有事务功能
+     * @param testDoc
+     * @return
+     */
     @DeleteMapping("/transaction")
     public ResponseEntity transactionTest(@RequestBody TestDoc testDoc) {
         long result = testDocService.deleteOne(testDoc.getId());
