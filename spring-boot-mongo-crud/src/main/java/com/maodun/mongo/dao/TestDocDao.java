@@ -1,6 +1,7 @@
 package com.maodun.mongo.dao;
 
 import com.maodun.mongo.pojo.TestDoc;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -22,4 +23,8 @@ public interface TestDocDao extends MongoRepository<TestDoc, String> {
     Optional<TestDoc> findByDocCodeIs(String docCode);
 
     Optional<List<TestDoc>> findByCreatorIdIsOrDocTextIs(String creatorId, String docText);
+
+    Optional<List<TestDoc>> findByCreatorIdLike(String creatorId);
+
+    Optional<List<TestDoc>> findByCreatorIdIs(String creatorId, Sort sort);
 }

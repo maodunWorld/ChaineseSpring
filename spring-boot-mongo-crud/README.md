@@ -108,9 +108,34 @@ Optional<List<TestDoc>> findByCreatorIdIsOrDocTextIs(String creatorId, String do
 ![](.README_images/05f6dea3.png)
 
 * 模糊搜索
+```java
+  Optional<List<TestDoc>> findByCreatorIdLike(String creatorId);
+```
+详情请看单元测试。
+* 结果排序   
+4种方法排序
+```java
+public interface PersonRepository extends MongoRepository<Person, String> {
+    
+    // 通过指定By***Sort升序降序
+  List<Person> findByFirstnameSortByAgeDesc(String firstname); 
+    // 通过传入Sort字段
+  List<Person> findByFirstname(String firstname, Sort sort);   
+    
+    //通过注解，使用MongoShell原生Json
+  @Query(sort = "{ age : -1 }")
+  List<Person> findByFirstname(String firstname);              
 
-* 结果排序
-
+    // 前两种的结合
+  @Query(sort = "{ age : -1 }")
+  List<Person> findByLastname(String lastname, Sort sort);     
+}
+```
+```java
+   Optional<List<TestDoc>> findByCreatorIdIs(String creatorId, Sort sort);
+```
+单元测试结果，顺序相反。
+![](.README_images/bde6e49b.png)
 * 分页查询
 
 * 原生MongoShell Json查询
