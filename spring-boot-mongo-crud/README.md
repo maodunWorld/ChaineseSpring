@@ -167,6 +167,7 @@ TODO
         Assertions.assertNotNull(save);
     }
 ```
+更新操作会比较简单，先查出来，再更新字段。
 
 ### DELETE操作
 * 通过_id删除
