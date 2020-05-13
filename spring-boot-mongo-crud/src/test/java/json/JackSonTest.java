@@ -75,7 +75,6 @@ public class JackSonTest {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             // 注意 TestDoc上的 @JsonFormat注解
-
             JavaType javaType = objectMapper.getTypeFactory().constructParametricType(List.class, TestDoc.class);
             CollectionType collectionType = objectMapper.getTypeFactory().constructCollectionType(List.class, TestDoc.class);
             List<TestDoc> testDocs = (List<TestDoc>) objectMapper.readValue(MutiJson, javaType);
