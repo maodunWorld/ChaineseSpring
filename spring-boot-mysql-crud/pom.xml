@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spring-boot-mysql</artifactId>
+    <artifactId>spring-boot-mysql-crud</artifactId>
 
 
 </project>

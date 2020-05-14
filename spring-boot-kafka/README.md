@@ -49,7 +49,6 @@ com.maodun.producer.TemplateSenderTest
      @Autowired
      private KafkaTemplate kafkaTemplate;
  
- 
      /**
       * 发送一条消息
       */
