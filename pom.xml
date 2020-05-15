@@ -18,6 +18,7 @@
         <module>spring-boot-protobuf</module>
         <module>spring-boot-elasticsearch</module>
         <module>spring-cloud-alibaba</module>
+        <module>spring-boot-starter-homemade</module>
     </modules>
 
     <parent>
@@ -60,6 +61,7 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <scope>annotationProcessor</scope>
         </dependency>
+
     </dependencies>
 
     <build>
