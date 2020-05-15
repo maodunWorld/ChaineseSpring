@@ -23,16 +23,23 @@ application.yaml -> 读取参数 -> JavaConfig -> 反射读取，实例化Bean -
 # JavaConfig
 ```java
 @Configuration
+@EnableConfigurationProperties(HomeMadePojoPropertise.class)
 public class HomeMadeConf {
+
+    @Autowired
+    private HomeMadePojoPropertise homeMadePojoPropertise;
 
     @Bean
     public HomeMadePojo initHomeMadePojo() {
         HomeMadePojo homeMadePojo = new HomeMadePojo();
-        homeMadePojo.setCode("hello home made");
-        homeMadePojo.setName("this is a homemade springboot starter");
+        homeMadePojo.setCode(homeMadePojoPropertise.getCode());
+        homeMadePojo.setName(homeMadePojoPropertise.getName());
+//        homeMadePojo.setName("name");
+//        homeMadePojo.setCode("code");
         return homeMadePojo;
     }
 }
+
 
 # 注意
 artifactId应按照spring-boot-starter-****, 例如 spring-boot-starter-homemade
@@ -81,17 +88,22 @@ public class HomeMadePojoPropertise {
     }
 }
 ```
-对应YAML文件
+对应YAML文件 或properties
 ```yaml
 homemade:
     name: ****
     code: ***
+```
+```properties
+homemade.name=***
+homemade.code=***
 ```
 JavaConfig
 ```java
 @EnableConfigurationProperties(HomeMadePojoPropertise.class)
 ```
 # 最后打包到Maven私服即可
+略
 
 # 自制Starter的单元测试
 ```java
