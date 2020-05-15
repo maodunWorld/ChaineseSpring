@@ -1,0 +1,13 @@
+name: hello SpringBoot
+
+app:
+  appName: ${name} this is is appName
+
+
+my:
+  servers:
+    - dev.example.com
+    - another.example.com
+demo:
+  name: demo
+  age: 5
