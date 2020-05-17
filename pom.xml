@@ -19,9 +19,9 @@
         <module>spring-boot-elasticsearch</module>
         <module>spring-cloud-alibaba</module>
         <module>spring-boot-starter-homemade</module>
-        <module>spring-boot-logging</module>
         <module>spring-boot-conf</module>
         <module>spring-boot-security</module>
+        <module>spring-boot-devtools</module>
     </modules>
 
     <parent>
