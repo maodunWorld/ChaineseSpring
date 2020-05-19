@@ -22,6 +22,7 @@
         <module>spring-boot-conf</module>
         <module>spring-boot-security</module>
         <module>spring-boot-devtools</module>
+        <module>spring-base</module>
     </modules>
 
     <parent>
