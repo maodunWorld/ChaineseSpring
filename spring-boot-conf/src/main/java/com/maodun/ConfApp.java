@@ -8,15 +8,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
-import java.util.List;
-
 /**
  * @author maodunWorld
  * @version 1.0
  * @date 2020/5/15 13:56
  */
 @SpringBootApplication
-@EnableConfigurationProperties({ConfDemo.class, ServersConf.class})
+@EnableConfigurationProperties({ConfDemo.class, ServersConf.class, RobotProperties.class})
 @Slf4j
 public class ConfApp implements CommandLineRunner {
 
@@ -30,6 +28,10 @@ public class ConfApp implements CommandLineRunner {
     private ServersConf serversConf;
 
     @Autowired
+    private RobotProperties robotProperties;
+
+
+    @Autowired
     private ConfDemo confDemo;
 
     public static void main(String[] args) {
@@ -38,10 +40,13 @@ public class ConfApp implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        log.info("this is my init method");
-        log.info("get --------" + name);
-        log.info("this is appName: " + appName);
-        log.info(confDemo.toString());
-        serversConf.getServers().forEach(System.out::println);
+//        log.info("this is my init method");
+//        log.info("get --------" + name);
+//        log.info("this is appName: " + appName);
+//        log.info(confDemo.toString());
+        System.out.println(robotProperties.toString());
+//        serversConf.getServers().forEach(System.out::println);
+
+
     }
 }

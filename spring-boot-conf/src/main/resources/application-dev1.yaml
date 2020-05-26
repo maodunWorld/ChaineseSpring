@@ -1,4 +1,21 @@
+name: hello SpringBoot
+
+app:
+  appName: ${name} this is is appName
+
 my:
   servers:
     - dev.example.com
     - another.example.com
+
+robot:
+  id: 301
+  interval:
+    hour:
+      list: 8;17;21
+  item: sh/zz数据传输
+  qq:
+    groups: 15233038
+    persons: 531472181
+  server:
+    ip: http://172.19.104.247:8182/inspection/pushing

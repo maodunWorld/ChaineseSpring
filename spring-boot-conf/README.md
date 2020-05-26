@@ -65,7 +65,41 @@ public class ConfDemo {
     }
 }
 ```
+# 复杂点
+```yaml
+robot:
+  id: 301
+  interval:
+    hour:
+      list: 8;17;21
+  item: sh/zz数据传输
+  qq:
+    groups: 15233038
+    persons: 531472181
+  server:
+    ip: http://172.19.104.247:8182/inspection/pushing
+```
+```java
+@ConfigurationProperties("robot")
+@Data
+@ToString
+public class RobotProperties {
+    private String id;
+    private String item;
+    @Value("${robot.interval.hour.list}")
+    private String interval;
+    @Value("${robot.server.ip}")
+    private String ip;
+    private qqPropperties qq = new qqPropperties();
 
+    @Data
+    @ToString
+    public class qqPropperties {
+        private String groups;
+        private String persons;
+    }
+}
+```
 # Profile 配置
 指定启动那个配置文件，可以指定多个
 ```yaml
