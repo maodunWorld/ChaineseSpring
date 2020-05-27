@@ -1,2 +1,25 @@
 server:
-  port: 8081
+  port: 8084
+
+management:
+  metrics:
+    export:
+      influx:
+        auto-create-db: true
+        db: test
+        uri: http://192.168.15.102:8086
+        connect-timeout: 1s
+        read-timeout: 10s
+        num-threads: 2
+        consistency: one
+        compressed: true
+        batch-size: 10000
+        enabled: true
+        step: 1m
+  endpoints:
+    jmx:
+      exposure:
+        exclude: "*"
+  server:
+    port: -1
+

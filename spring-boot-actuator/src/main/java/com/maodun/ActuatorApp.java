@@ -1,10 +1,7 @@
 package com.maodun;
 
-import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 /**
  * @author maodunWorld
