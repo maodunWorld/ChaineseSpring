@@ -1,0 +1,15 @@
+server:
+  port: 8085
+
+management:
+  metrics:
+    export:
+      influx:
+        enabled: false
+
+  endpoints:
+    jmx:
+      exposure:
+        exclude: '*'
+  server:
+    port: -1

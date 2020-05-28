@@ -4,13 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @author maodunWorld
- * @version 1.0
- * @date 2020/5/14 16:55
+ * @author tongjian
+ * @date 2020/5/27 17:06
  */
 @SpringBootApplication
-public class ActuatorApp {
+public class PrometheusApp {
     public static void main(String[] args) {
-        SpringApplication.run(ActuatorApp.class);
+        SpringApplication.run(PrometheusApp.class, "--spring.profiles.active=prometheus");
     }
 }

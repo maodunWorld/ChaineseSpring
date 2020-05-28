@@ -6,16 +6,16 @@
 # Metrics 
 Java常用的Metrics库
 * [dropwizard/metrics](https://github.com/dropwizard/metrics) ,Flink Samza等大数据处理框架中所使用的Metrics库。
-* [micrometer-metrics](https://github.com/micrometer-metrics/micrometer), SpringBoot2中所使用的Metrics库。
+* [micrometer-metrics](https://github.com/micrometer-metrics/micrometer), SpringBoot2中所使用的Metrics库，只有接口没有实现，类比如Sl4j框架。
 
 
 ## docker 环境
 1. docker安装 influxDb
-```bash
+```text
 docker run -d --name influx -p 8086:8086 influxdb
 ```
 2. docker安装Grafana
-```bash
+```text
 docker run -d --name=grafana -p 3000:3000 grafana/grafana
 ```
 3. docker 安装Prometheus
@@ -26,19 +26,53 @@ docker run --name prometheus -d -p 9090:9090 prom/prometheus
 ## 禁用SpringBoot Actuator中Http监控，JMX监控。
 ```yaml
 management:
-# http 
-  server:
-    port: -1
-# JMX
+  #JMX
   endpoints:
     jmx:
       exposure:
-        exclude: "*"
-
+        exclude: '*'
+  #Http
+  server:
+    port: -1
 ```
 ## InfluxDb + Grafana Metrics 监控
-
-### 自定义Metrics
+pom
+```xml
+      <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-influx</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+```
+yml
+```yaml
+management:
+  metrics:
+    export:
+      influx:
+        auto-create-db: true
+        db: test
+        uri: http://192.168.15.102:8086
+        connect-timeout: 1s
+        read-timeout: 10s
+        num-threads: 1
+        consistency: one
+        compressed: true
+        batch-size: 10000
+        enabled: true
+        step: 1m
+      prometheus:
+        enabled: false
+```
+grafana 简单步骤 搞个数据源 -> 搞个图表 -> 写好对应Sql —> 结果渲染  
+![](.README_images/926aa189.png)
+![](.README_images/2db5a7a9.png)
+![](.README_images/1a1ff1a3.png)
+### 自定义Metrics，并在Grafana中监控
 装配注册中心。
 ```java
 @Bean
@@ -64,14 +98,13 @@ public class SampleBean {
 
 }
 ```
+
+### grafana 告警
+TODO
+
 ## Prometheus + Grafana Metrics监控SpringBoot
 
-1. docker安装Prometheus + Grafana
-
-
-
-
-* 监控Controller OR Service
+## 监控Controller OR Service 的Api
 ```java
 @Timed
 // 注解即可
@@ -82,6 +115,14 @@ public class SampleBean {
 [SpringBoot整合InfluxDb](https://www.dazhuanlan.com/2019/08/17/5d5774af8c8c8/?__cf_chl_jschl_tk__=fd9c38c5f9630a029ed92ce117fada5720c0a026-1590557100-0-AfuadPYpx4i-9Zzmv8JN4M2hhsG6GvCcLNQ2jTYMfQerlGicufFp9aqND7HzkjWHjpEDRA_Q35fTn8Op2S_EBN7LDLTjBzW_4vxYoHWeL-WOdvrbiEHO6QWKaiyhrpyGnB5sgURanKM0dRJxk51v-phW2r3jO1RH2miNOxGqyrgbnyhxwoi82KRQ5th1bwo0j5io1RlkMQ-RabDq81-5ySX9axFsGeMA74td3N2AO0cg_aUJdSNa1zRdpU0nLjwnYuFfboFWyoikiZOZsjbPP1xolUYQkYc77e2w5gjWBPHw2hwFz93QMbpOBYPhAhf07Q)  
 [Spring Actuator](https://docs.spring.io/spring-boot/docs/2.3.0.RELEASE/reference/html/production-ready-features.html#production-ready)  
 [SpringBoot中的Metrics框架](https://www.cnblogs.com/rolandlee/p/11343848.html)    
-[Http接口的暴露](https://blog.csdn.net/yaomingyang/article/details/84035975)
+[Http接口的暴露](https://blog.csdn.net/yaomingyang/article/details/84035975)  
+[SpringBoot Prometheus](https://blog.csdn.net/u010391342/article/details/88970133)     
+[JMX 的介绍](https://www.jianshu.com/p/fa4e88f95631)  
+[Grafana DashBords仓库](https://grafana.com/grafana/dashboards)  
+[超大规模Metrcis监控](https://github.com/zalando-zmon)    
+
+# HA 
+[Prometheus HA 长期存储](https://github.com/thanos-io/thanos)  
+[M3 存储](https://github.com/m3db/m3)
 # 时序数据库总结
 
