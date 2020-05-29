@@ -104,11 +104,9 @@ TODO
 
 ## Prometheus + Grafana Metrics监控SpringBoot
 
-## 监控Controller OR Service 的Api
-```java
-@Timed
-// 注解即可
-```
+## Timed注解
+
+
 
 # 参考
 [SpringBoot监控对比](https://hacpai.com/article/1577185696409)  
@@ -119,7 +117,8 @@ TODO
 [SpringBoot Prometheus](https://blog.csdn.net/u010391342/article/details/88970133)     
 [JMX 的介绍](https://www.jianshu.com/p/fa4e88f95631)  
 [Grafana DashBords仓库](https://grafana.com/grafana/dashboards)  
-[超大规模Metrcis监控](https://github.com/zalando-zmon)    
+[超大规模Metrcis监控](https://github.com/zalando-zmon)     
+[自定义Redis Cache命中率到 InfluxDb](http://www.likecs.com/show-61802.html)
 
 # HA 
 [Prometheus HA 长期存储](https://github.com/thanos-io/thanos)  
