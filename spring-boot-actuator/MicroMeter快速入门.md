@@ -163,7 +163,7 @@ registry.more().timer("cache.gets.latency", Tags.of("name", cache.getName()), ca
 );
 ```
 ##  Distribution summaries 聚合度量
-``java
+```java
 DistributionSummary summary = DistributionSummary
     .builder("response.size")
     .description("a description of what this summary does") // optional
@@ -171,7 +171,7 @@ DistributionSummary summary = DistributionSummary
     .tags("region", "test") // optional
     .scale(100) // optional (2)
     .register(registry);
-``
+```
 // TODO
 
 ## Histograms and percentiles

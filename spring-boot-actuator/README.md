@@ -72,41 +72,118 @@ grafana 简单步骤 搞个数据源 -> 搞个图表 -> 写好对应Sql —> 结
 ![](.README_images/926aa189.png)
 ![](.README_images/2db5a7a9.png)
 ![](.README_images/1a1ff1a3.png)
-### 自定义Metrics，并在Grafana中监控
-装配注册中心。
+## 自定义Metrics，并在Grafana中监控
+第一种：实现 MeterBinder 接口，Spring将会自动装配
 ```java
-@Bean
-MeterRegistryCustomizer<MeterRegistry> metricsCommonTags() {
-    return registry -> registry.config().commonTags("region", "us-east-1");
+/**
+ * @author tongjian
+ * @date 2020/5/28 18:26
+ */
+@Component
+public class UDFMetrics implements MeterBinder {
+    AtomicInteger atomicInteger = new AtomicInteger(0);
+
+    @Override
+    public void bindTo(MeterRegistry meterRegistry) {
+        Gauge.builder("udfcouter", atomicInteger, c -> c.incrementAndGet())
+                .tag("host", "localhost")
+                .description("自定义metrcis")
+                .register(meterRegistry);
+    }
 }
+```
+第二种：通过构造函数，注册中心绑定。 使用@Component 或 @Service 等IOC容器注解，SpringBoot将会自动装配
+```java
+/**
+ * @author maodun
+ * @date 2020/5/29 15:27
+ */
+@Component
+public class RegistryBind {
+    private final List<String> words = new CopyOnWriteArrayList<>();
+
+    public RegistryBind(MeterRegistry registry) {
+        registry.gaugeCollectionSize("dictionary.size", Tags.empty(), this.words);
+    }
+}
+
+```
+第三种，通过@Bean 注解装配IOC容器。
+```java
+/**
+ * @author maodun
+ * @date 2020/5/29 15:31
+ */
+@Configuration
+public class MetricsConf {
+    @Bean
+    public Counter udfCounter() {
+        return Metrics.globalRegistry.counter("testCounter", Tags.empty());
+    }
+}
+
 ```
 在IOC容器中使用
 ```java
+/**
+ * @author maodun
+ * @date 2020/5/29 15:36
+ */
 @Component
-public class SampleBean {
-
+public class MetricsBean {
     private final Counter counter;
 
-    public SampleBean(MeterRegistry registry) {
-        this.counter = registry.counter("received.messages");
+    public MetricsBean(MeterRegistry registry) {
+        RequiredSearch testcounter = registry.get("testCounter");
+        this.counter = testcounter.counter();
     }
 
     public void handleMessage(String message) {
         this.counter.increment();
         // handle message implementation
     }
-
 }
 ```
+### 单元测试
+首先我们看下SpringBoot已有的 Metrics Meter （JVM，Http，Tomcat）, 代码在UDFMetrcis目录下。UDFMetrics.BaseMetrics.java
+```java
+/**
+ * @author tongjian
+ * @date 2020/5/29 15:49
+ */
+@SpringBootTest(classes = InfluxApp.class, args = "--spring.profiles.active=influx")
+@Slf4j
+public class BaseMetrics {
+    private static final AtomicInteger registrySize = new AtomicInteger(0);
+    private static final AtomicInteger meterSize = new AtomicInteger(0);
+
+    @Test
+    void allMetrics() {
+        for (MeterRegistry registry : Metrics.globalRegistry.getRegistries()) {
+            registrySize.incrementAndGet();
+            log.info("Registry Name is: {}", registry.config().toString());
+            for (Meter meter : registry.getMeters()) {
+                meterSize.incrementAndGet();
+                log.info("Meter名字为: {} ", meter.getId().getName());
+            }
+        }
+        log.info("注册中心数量为: {}，Metrics 仪表数为: {}", registrySize.get(), meterSize.get());
+    }
+}
+```
+![](.README_images/9b7ae3f8.png)  
+![](.README_images/4674382a.png)  
+自定义的Metrics都注册入了注册中心，并且输出到了InfluxDb。 下面我来学习如果使用一个自定义的Metrics。UDFMetrics.UDFMetricsUse.java
+
+
 
 ### grafana 告警
 TODO
 
 ## Prometheus + Grafana Metrics监控SpringBoot
-
+TODO
 ## Timed注解
-
-
+TODO
 
 # 参考
 [SpringBoot监控对比](https://hacpai.com/article/1577185696409)  
@@ -118,10 +195,11 @@ TODO
 [JMX 的介绍](https://www.jianshu.com/p/fa4e88f95631)  
 [Grafana DashBords仓库](https://grafana.com/grafana/dashboards)  
 [超大规模Metrcis监控](https://github.com/zalando-zmon)     
-[自定义Redis Cache命中率到 InfluxDb](http://www.likecs.com/show-61802.html)
+[自定义Redis Cache命中率到 InfluxDb](http://www.likecs.com/show-61802.html)  
+[自定义Metrics](https://cloud.tencent.com/developer/article/1477642)
+
 
 # HA 
 [Prometheus HA 长期存储](https://github.com/thanos-io/thanos)  
 [M3 存储](https://github.com/m3db/m3)
-# 时序数据库总结
 
