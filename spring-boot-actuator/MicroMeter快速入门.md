@@ -146,6 +146,8 @@ registry.config().namingConvention(myCustomNamingConvention);
         // 通过
     }
 ```
+### Gauge NaN in Prometheus
+
 ## Timer 定时度量，而Guava里的Stopwatch是计时器
 ```java
  Timer register = Timer.builder("my.timer")

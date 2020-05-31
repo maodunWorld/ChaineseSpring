@@ -15,7 +15,6 @@ public class MetricsConf {
     @Bean
     public Counter udfCounter() {
         Counter counter = Metrics.globalRegistry.counter("testCouter", Tags.of("k", "v"));
-        counter.increment(3d);
         return counter;
     }
 

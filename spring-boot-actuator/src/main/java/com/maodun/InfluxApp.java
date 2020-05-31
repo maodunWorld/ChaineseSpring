@@ -1,12 +1,12 @@
 package com.maodun;
 
-import io.micrometer.core.instrument.MeterRegistry;
+import com.maodun.metrics.MyCounter;
+import com.maodun.metrics.MyCounterV2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -15,22 +15,37 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2020/5/14 16:55
  */
 @SpringBootApplication
+@Slf4j
 @RestController
-public class InfluxApp {
+public class InfluxApp implements CommandLineRunner {
+
     @Autowired
-    private MeterRegistry meterRegistry;
+    private MyCounter myCounter;
+
+    @Autowired
+    private MyCounterV2 myCounterV2;
 
     public static void main(String[] args) {
         SpringApplication.run(InfluxApp.class, "--spring.profiles.active=influx");
     }
 
-    @GetMapping("/metrics")
-    public ResponseEntity getMetrics() {
-        return null;
-    }
-
-    @PostMapping("/metrics")
-    public ResponseEntity addMetrics() {
-        return null;
+    @Override
+    public void run(String... args) throws Exception {
+//        while (true) {
+//            myCounterV2.add();
+//            Thread.sleep(500);
+//            System.out.println(myCounterV2.get());
+//
+//        }
+//        int time = 0;
+//        for (int i = 0; i < 100; i++) {
+//            myCounter.counterAdd();
+//        }
+//        while (true) {
+//            Thread.sleep(1000);
+//            time++;
+//            System.out.println(myCounter.getCount());
+//            System.out.println(time);
+//        }
     }
 }

@@ -7,15 +7,42 @@ management:
       influx:
         auto-create-db: true
         db: test
-        uri: http://192.168.15.102:8086
-        connect-timeout: 1s
-        read-timeout: 10s
-        num-threads: 1
-        consistency: one
-        compressed: true
-        batch-size: 10000
-        enabled: true
-        step: 1m
+        uri: http://192.168.30.102:8086
+
+          # 连接和读取的超时时间
+          #        connect-timeout: 1s
+          #        read-timeout: 10s
+
+          # 线程数，默认为2
+          #        num-threads: 1
+
+          # ANY 写入任何一个节点，就返回成功（即使数据的所属文件和节点不一致，也算保存成功）
+          # ONE 可以写入任何一个节点，就返回成功（必须数据所属文件和节点一致才算保存成功）
+          # QUORUM 大多数节点返回成功即成功（例如 三个节点，两个节点保存成功，即可按成功返回）
+          # ALL 所有节点返回成功才算成功 （例如有三个节点，所有节点保存成功，才算是成功）
+          #        consistency: one
+
+          # 是否开启压缩
+          #        compressed: true
+
+          # 批大小
+          #        batch-size: 10000
+
+          #        enabled: true
+
+          # 多久保存一次，默认为一分钟一次
+          #        step: 1m
+
+          #数据保留策略
+          # retentionPolicy: autogen
+          #Time period for which Influx should retain data in the current database. For instance 7d
+          # 数据保留的时间，例如保留七天
+          #retentionDuration:
+          #How many copies of the data are stored in the cluster. Must be 1 for a single node instance.
+          #节点的备份数据，单节点的必须为1
+          #retentionReplicationFactor:
+          #每一组文件，保存的时间范围
+
       prometheus:
         enabled: false
   endpoints:

@@ -71,28 +71,35 @@ management:
 grafana 简单步骤 搞个数据源 -> 搞个图表 -> 写好对应Sql —> 结果渲染  
 ![](.README_images/926aa189.png)
 ![](.README_images/2db5a7a9.png)
-![](.README_images/1a1ff1a3.png)
+![](.README_images/1a1ff1a3.png)  
+### grafana 告警
+TODO
+
+## Prometheus + Grafana Metrics监控SpringBoot
+TODO
+
+## Timed注解
+TODO
+
 ## 自定义Metrics，并在Grafana中监控
 第一种：实现 MeterBinder 接口，Spring将会自动装配
 ```java
 /**
  * @author tongjian
- * @date 2020/5/28 18:26
+ * @date 2020/5/29 15:27
  */
 @Component
-public class UDFMetrics implements MeterBinder {
-    AtomicInteger atomicInteger = new AtomicInteger(0);
+public class RegistryBind implements MeterBinder {
 
     @Override
     public void bindTo(MeterRegistry meterRegistry) {
-        Gauge.builder("udfcouter", atomicInteger, c -> c.incrementAndGet())
-                .tag("host", "localhost")
-                .description("自定义metrcis")
-                .register(meterRegistry);
+        // 通过 meterRigistry注册Metrics
     }
 }
 ```
-第二种：通过构造函数，注册中心绑定。 使用@Component 或 @Service 等IOC容器注解，SpringBoot将会自动装配
+如果你不想添加@Component的注解，请使用@Bean注解托管到IOC容器。   
+
+第二种：通过构造函数，注册中心绑定。 使用@Component 或 @Service 等IOC容器注解，SpringBoot将会自动装配，同样，如果你不用@Component注解，请用@Bean注解。
 ```java
 /**
  * @author maodun
@@ -106,46 +113,21 @@ public class RegistryBind {
         registry.gaugeCollectionSize("dictionary.size", Tags.empty(), this.words);
     }
 }
-
 ```
-第三种，通过@Bean 注解装配IOC容器。
+第三种: 直接使用全局注册中心
 ```java
-/**
- * @author maodun
- * @date 2020/5/29 15:31
- */
-@Configuration
-public class MetricsConf {
-    @Bean
-    public Counter udfCounter() {
-        return Metrics.globalRegistry.counter("testCounter", Tags.empty());
-    }
-}
-
-```
-在IOC容器中使用
-```java
-/**
- * @author maodun
- * @date 2020/5/29 15:36
- */
 @Component
-public class MetricsBean {
-    private final Counter counter;
+public class MyCounter {
+    static final Counter Counter1 = Metrics.counter("a.test.counter", "bind", "demo");
 
-    public MetricsBean(MeterRegistry registry) {
-        RequiredSearch testcounter = registry.get("testCounter");
-        this.counter = testcounter.counter();
-    }
-
-    public void handleMessage(String message) {
-        this.counter.increment();
-        // handle message implementation
+    public void counterAdd() {
+        Counter1.increment(10d);
     }
 }
 ```
+
 ### 单元测试
-首先我们看下SpringBoot已有的 Metrics Meter （JVM，Http，Tomcat）, 代码在UDFMetrcis目录下。UDFMetrics.BaseMetrics.java
+首先我们看下SpringBoot已有的 Metrics Meter （JVM，Http，Tomcat）, 代码在UDFMetrcis目录下。
 ```java
 /**
  * @author tongjian
@@ -173,18 +155,42 @@ public class BaseMetrics {
 ```
 ![](.README_images/9b7ae3f8.png)  
 ![](.README_images/4674382a.png)  
-自定义的Metrics都注册入了注册中心，并且输出到了InfluxDb。 下面我来学习如果使用一个自定义的Metrics。UDFMetrics.UDFMetricsUse.java
+自定义的Metrics都注册入了注册中心，并且输出到了InfluxDb。 下面我来学习如果使用一个自定义的Metrics Counter。
+```java
+@Component
+public class MyCounterV2 {
+    public static final AtomicInteger atomicInteger = new AtomicInteger(0);
+    public static final FunctionCounter testunit = FunctionCounter.builder("a.test.counter2", atomicInteger, AtomicInteger::get)
+            .baseUnit("testunit")
+            .register(Metrics.globalRegistry);
 
+    public void add() {
+        atomicInteger.incrementAndGet();
+    }
 
+    public double get() {
+        return testunit.count();
+    }
 
-### grafana 告警
-TODO
+    public double get2() {
+        return testunit.measure().iterator().next().getValue();
+    }
 
-## Prometheus + Grafana Metrics监控SpringBoot
-TODO
-## Timed注解
-TODO
-
+    public double get3() {
+        return atomicInteger.get();
+    }
+}
+```
+```java
+// 在Main App中调用
+    while (true) {
+            myCounterV2.add();
+            Thread.sleep(500);
+            System.out.println(myCounterV2.get());
+        }
+```
+最后写入Influx的数据, 我发现，只会写入你步长范围内的增量，也就是一分钟内，计数器的增量。而且你的非函数Counter，写入Influxdb后，计数会归于零。
+![](.README_images/acf08d45.png)
 # 参考
 [SpringBoot监控对比](https://hacpai.com/article/1577185696409)  
 [SpringBoot整合InfluxDb](https://www.dazhuanlan.com/2019/08/17/5d5774af8c8c8/?__cf_chl_jschl_tk__=fd9c38c5f9630a029ed92ce117fada5720c0a026-1590557100-0-AfuadPYpx4i-9Zzmv8JN4M2hhsG6GvCcLNQ2jTYMfQerlGicufFp9aqND7HzkjWHjpEDRA_Q35fTn8Op2S_EBN7LDLTjBzW_4vxYoHWeL-WOdvrbiEHO6QWKaiyhrpyGnB5sgURanKM0dRJxk51v-phW2r3jO1RH2miNOxGqyrgbnyhxwoi82KRQ5th1bwo0j5io1RlkMQ-RabDq81-5ySX9axFsGeMA74td3N2AO0cg_aUJdSNa1zRdpU0nLjwnYuFfboFWyoikiZOZsjbPP1xolUYQkYc77e2w5gjWBPHw2hwFz93QMbpOBYPhAhf07Q)  
@@ -197,6 +203,7 @@ TODO
 [超大规模Metrcis监控](https://github.com/zalando-zmon)     
 [自定义Redis Cache命中率到 InfluxDb](http://www.likecs.com/show-61802.html)  
 [自定义Metrics](https://cloud.tencent.com/developer/article/1477642)
+[自定义Metrics](https://www.jianshu.com/p/082571330190)
 
 
 # HA 
