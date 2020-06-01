@@ -23,6 +23,7 @@
         <module>spring-boot-security</module>
         <module>spring-boot-devtools</module>
         <module>spring-base</module>
+        <module>spring-boot-test</module>
     </modules>
 
     <parent>
