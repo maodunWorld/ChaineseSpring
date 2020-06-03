@@ -20,7 +20,7 @@ public class HtmlController {
 ![](.README_images/d9dcf989.png)
 ![](.README_images/a055c30e.png)
 ## 不走Node，不走Webpack
-#### 离线CDN，一个最简单的 Vue + ElementUI + Axios 的页面
+#### 离线CDN，一个最简单的 Vue + ElementUI 的页面
 1. [下载Vue压缩版](https://cdn.jsdelivr.net/npm/vue)
 2. 下载ElementUI的离线CDN  
 3. 下载Axios的离线CDN  
