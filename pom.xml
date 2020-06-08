@@ -21,10 +21,10 @@
         <module>spring-boot-starter-homemade</module>
         <module>spring-boot-conf</module>
         <module>spring-boot-security</module>
-        <module>spring-boot-devtools</module>
         <module>spring-base</module>
         <module>spring-boot-test</module>
         <module>spring-boot-vue</module>
+        <module>spring-boot-cassandra</module>
     </modules>
 
     <parent>
