@@ -41,3 +41,30 @@ CREATE TABLE user_key_space.user (id TimeUUID PRIMARY KEY, name text, surname te
         assertThat(all.isEmpty()).isFalse();
     }
 ```
+
+# 分页的坑
+![](.README_images/a5cde194.png)
+估计Cassandra底层大量的链结构，所以分页查询必须从零开始，必须第一页开始翻，比如
+```java
+CassandraPageRequest pageCondition = CassandraPageRequest.of(0, pageSize);
+Slice<Event> result = Dao(pageCondition)
+Slice resultContainer = getFinalPage(pageIndex, result).getContent();
+
+
+    private Slice getFinalPage(Integer pageIndex, Slice<Event> slice) {
+        Slice resultSlice = null;
+        if (pageIndex != 0 && slice.hasNext()) {
+            for (int i = 1; i < pageIndex; i++) {
+                if (slice.hasNext()) {
+                    resultSlice = Dao.findAll(slice.nextPageable());
+                } else {
+                    break;
+                }
+            }
+            return resultSlice;
+        } else {
+            return slice;
+        }
+    }
+
+```
