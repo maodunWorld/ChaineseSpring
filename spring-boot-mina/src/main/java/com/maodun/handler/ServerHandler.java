@@ -15,7 +15,10 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class ServerHandler extends IoHandlerAdapter {
-
+//    public static final AtomicInteger atomicInteger = new AtomicInteger(0);
+//    public static final FunctionCounter testunit = FunctionCounter.builder("a.test.counter2", atomicInteger, AtomicInteger::get)
+//            .baseUnit("testunit")
+//            .register(Metrics.globalRegistry);
     @Autowired
     private StringBean stringBean;
 
