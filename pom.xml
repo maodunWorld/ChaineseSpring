@@ -25,6 +25,7 @@
         <module>spring-boot-test</module>
         <module>spring-boot-vue</module>
         <module>spring-boot-cassandra</module>
+        <module>spring-boot-feign</module>
     </modules>
 
     <parent>
