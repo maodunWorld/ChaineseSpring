@@ -1,7 +1,6 @@
 package com.maodun.metrics;
 
 import io.micrometer.core.instrument.Counter;
-import io.micrometer.core.instrument.FunctionCounter;
 import io.micrometer.core.instrument.Measurement;
 import io.micrometer.core.instrument.Metrics;
 import lombok.extern.slf4j.Slf4j;
