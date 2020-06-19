@@ -45,4 +45,13 @@ class SingleFeignTest {
         String s = target.postBody("hello1", "hello2");
         System.out.println(s);
     }
+
+    @Test
+    void postForm() {
+        SingleFeign target = Feign.builder().target(SingleFeign.class, "http://localhost:1888/api");
+        LinkedHashMap<String, Object> stringObjectLinkedHashMap = new LinkedHashMap<>();
+        stringObjectLinkedHashMap.put("testform", "test form str");
+        String s = target.postForm(stringObjectLinkedHashMap);
+        System.out.println(s);
+    }
 }

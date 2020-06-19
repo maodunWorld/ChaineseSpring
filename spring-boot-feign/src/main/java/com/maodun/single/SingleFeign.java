@@ -23,4 +23,8 @@ public interface SingleFeign {
     @Headers("Content-Type: application/json")
     @Body("%7B\"str1\": \"{str1}\", \"str2\": \"{str2}\"%7D")
     String postBody(@Param("str1") String str1, @Param("str2") String str2);
+
+    @RequestLine("POST /postform")
+    String postForm(@QueryMap Map<String, Object> form);
+
 }

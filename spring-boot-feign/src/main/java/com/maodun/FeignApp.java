@@ -1,7 +1,6 @@
 package com.maodun;
 
 import lombok.extern.slf4j.Slf4j;
-import lombok.extern.slf4j.XSlf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
@@ -22,19 +21,19 @@ public class FeignApp {
     }
 
     @GetMapping("/get/{str}")
-    public String getPath(@PathVariable String str){
+    public String getPath(@PathVariable String str) {
         log.info("get pathV {}", str);
         return "ok";
     }
 
     @GetMapping("/getform")
-    public String getForm(@RequestParam String str){
+    public String getForm(@RequestParam String str) {
         log.info("form data {}", str);
         return "ok";
     }
 
     @GetMapping("/getheader")
-    public String getHeader(@RequestHeader("test") String test){
+    public String getHeader(@RequestHeader("test") String test) {
         log.info("header test {}", test);
         return "ok";
     }
@@ -45,4 +44,9 @@ public class FeignApp {
         return "ok";
     }
 
+    @PostMapping("/postform")
+    public String postform(@RequestParam("testform") String str) {
+        log.info("post form  {} ", str);
+        return "ok";
+    }
 }
