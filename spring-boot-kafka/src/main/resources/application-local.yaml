@@ -9,4 +9,3 @@ spring:
       bootstrap-servers: 192.168.15.102:9092
       # key-serializer:  指定Key的序列化类
       # value-serializer:  指定Value的序列化类
-    bootstrap-servers: 192.168.15.102:9092

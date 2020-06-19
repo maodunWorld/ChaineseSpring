@@ -26,12 +26,14 @@
         <module>spring-boot-vue</module>
         <module>spring-boot-cassandra</module>
         <module>spring-boot-feign</module>
+        <module>spring-boot-scheduler</module>
+        <module>spring-boot-logging</module>
     </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.1.RELEASE</version>
+        <version>2.3.0.RELEASE</version>
     </parent>
 
 
