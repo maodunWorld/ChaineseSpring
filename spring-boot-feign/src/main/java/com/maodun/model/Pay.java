@@ -1,4 +1,4 @@
-package com.maodun;
+package com.maodun.model;
 
 import lombok.Data;
 import lombok.ToString;

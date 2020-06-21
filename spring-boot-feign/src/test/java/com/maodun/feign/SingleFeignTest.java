@@ -1,6 +1,6 @@
-package com.maodun.single;
+package com.maodun.feign;
 
-import com.maodun.Pay;
+import com.maodun.model.Pay;
 import feign.Feign;
 import org.junit.jupiter.api.Test;
 

@@ -13,5 +13,4 @@ public class TemplateSender {
     @Autowired
     private KafkaTemplate kafkaTemplate;
 
-
 }

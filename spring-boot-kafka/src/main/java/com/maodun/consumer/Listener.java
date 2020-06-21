@@ -13,7 +13,6 @@ import org.springframework.kafka.support.Acknowledgment;
 
 @Log4j2
 public class Listener {
-
     @KafkaListener(topics = "myTopic")
     public void LisenerDemo(ConsumerRecord<?, ?> record, Acknowledgment ack) {
         log.info(record.value().toString());
