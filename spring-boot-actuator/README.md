@@ -76,8 +76,35 @@ grafana 简单步骤 搞个数据源 -> 搞个图表 -> 写好对应Sql —> 结
 TODO
 
 ## Prometheus + Grafana Metrics监控SpringBoot
-TODO
-
+pom
+```xml
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>io.micrometer</groupId>
+        <artifactId>micrometer-registry-prometheus</artifactId>
+        <scope>runtime</scope>
+    </dependency>
+```
+yml
+```yaml
+server:
+  port: 8085
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      influx:
+        enabled: false
+```
 ## Timed注解
 TODO
 

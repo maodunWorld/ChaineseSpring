@@ -2,14 +2,15 @@ server:
   port: 8085
 
 management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
   metrics:
     export:
       influx:
         enabled: false
 
-  endpoints:
-    jmx:
-      exposure:
-        exclude: '*'
-  server:
-    port: -1
