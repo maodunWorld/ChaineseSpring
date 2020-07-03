@@ -92,6 +92,7 @@ yml
 ```yaml
 server:
   port: 8085
+
 management:
   endpoints:
     web:
@@ -104,7 +105,23 @@ management:
     export:
       influx:
         enabled: false
+    tags:
+      application: ${spring.application.name}
+spring:
+  application:
+    name: springboot-promethues
 ```
+promethues.yml配置，建议使用安装包安装promethues
+```yaml
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'spring'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['localhost:8085']
+```
+启动promethues, promethues.exe --config.file=promethues.yml, 默认端口为9090，在grafana导入别人写好的模板,https://grafana.com/grafana/dashboards/4701，注意在Grafana中导入时选择自己的promethues数据源。最后结果。
+![](.README_images/800a415f.png)
 ## Timed注解
 TODO
 

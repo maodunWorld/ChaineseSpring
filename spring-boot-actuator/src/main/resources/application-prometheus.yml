@@ -13,4 +13,8 @@ management:
     export:
       influx:
         enabled: false
-
+    tags:
+      application: ${spring.application.name}
+spring:
+  application:
+    name: springboot-promethues
