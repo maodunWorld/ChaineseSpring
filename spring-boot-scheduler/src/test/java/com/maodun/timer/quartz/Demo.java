@@ -39,7 +39,6 @@ public class Demo {
         final Scheduler defaultScheduler = StdSchedulerFactory.getDefaultScheduler();
         defaultScheduler.start();
         defaultScheduler.shutdown();
-
     }
 
     @Test
