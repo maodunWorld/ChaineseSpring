@@ -120,7 +120,7 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:8085']
 ```
-启动promethues, promethues.exe --config.file=promethues.yml, 默认端口为9090，在grafana导入别人写好的模板,https://grafana.com/grafana/dashboards/4701，注意在Grafana中导入时选择自己的promethues数据源。最后结果。
+启动promethues, promethues.exe --config.file=promethues.yml, 默认端口为9090，在grafana导入别人写好的模板, https://grafana.com/grafana/dashboards/4701，注意在Grafana中导入时选择自己的promethues数据源。最后结果。
 ![](.README_images/800a415f.png)
 ## Timed注解
 TODO

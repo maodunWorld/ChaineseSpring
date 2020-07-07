@@ -28,6 +28,8 @@
         <module>spring-boot-feign</module>
         <module>spring-boot-scheduler</module>
         <module>spring-boot-logging</module>
+        <module>spring-boot-netty</module>
+        <module>spring-boot-mina</module>
     </modules>
 
     <parent>
