@@ -122,6 +122,15 @@ scrape_configs:
 ```
 启动promethues, promethues.exe --config.file=promethues.yml, 默认端口为9090，在grafana导入别人写好的模板, https://grafana.com/grafana/dashboards/4701，注意在Grafana中导入时选择自己的promethues数据源。最后结果。
 ![](.README_images/800a415f.png)
+### 如果你是很短暂的作业，可以使用[Promethues PushGateWay](https://github.com/prometheus/pushgateway)
+```xml
+<dependency>
+    <groupId>io.prometheus</groupId>
+    <artifactId>simpleclient_pushgateway</artifactId>
+</dependency>
+```
+* 提供的自动装配
+![](.README_images/590b0ec2.png)
 ## Timed注解
 TODO
 

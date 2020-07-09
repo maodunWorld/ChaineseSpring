@@ -13,6 +13,7 @@ management:
     export:
       influx:
         enabled: false
+      prometheus.p
     tags:
       application: ${spring.application.name}
 spring:
