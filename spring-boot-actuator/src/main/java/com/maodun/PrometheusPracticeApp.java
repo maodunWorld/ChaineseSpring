@@ -7,6 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import static java.lang.Thread.sleep;
+
 /**
  * @author tongjian
  * @date 2020/7/10 11:38
@@ -25,5 +27,9 @@ public class PrometheusPracticeApp implements CommandLineRunner {
     public void run(String... args) throws Exception {
         double v = MyGauge.myGauge.doubleValue();
         log.info("Start myGauge Value {} ", v);
+        while (true) {
+            sleep(1000);
+            MyGauge.myGauge.incrementAndGet();
+        }
     }
 }

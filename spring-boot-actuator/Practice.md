@@ -12,7 +12,12 @@ management:
     export:
       influx:
         enabled: false
+    tags:
+      application: ${spring.application.name}
   endpoint:
     prometheus:
       enabled: true
+spring:
+  application:
+    name: springboot-promethues
 ```
