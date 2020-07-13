@@ -22,10 +22,10 @@
             <scope>runtime</scope>
         </dependency>
 
-        <dependency>
-            <groupId>io.prometheus</groupId>
-            <artifactId>simpleclient_pushgateway</artifactId>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>io.prometheus</groupId>-->
+        <!--            <artifactId>simpleclient_pushgateway</artifactId>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>io.micrometer</groupId>
