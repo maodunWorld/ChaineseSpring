@@ -9,3 +9,6 @@ management:
     export:
       influx:
         enabled: false
+  endpoint:
+    prometheus:
+      enabled: true
