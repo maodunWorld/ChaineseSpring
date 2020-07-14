@@ -24,9 +24,20 @@ public class PrometheusPracticeApp implements CommandLineRunner {
     public void run(String... args) throws Exception {
         double v = MyGauge.myGauge.doubleValue();
         log.info("Start myGauge Value {} ", v);
+        new Thread(() -> {
+            while (true) {
+                try {
+                    sleep(10000);
+                    MyGauge.myGauge.set(0);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
         while (true) {
             sleep(1000);
-            MyGauge.myGauge.incrementAndGet();
+            int i = MyGauge.myGauge.incrementAndGet();
+            System.out.println("Now gauge value is {}" + i);
         }
     }
 }
