@@ -31,6 +31,7 @@
         <module>spring-boot-mina</module>
         <module>spring-boot-shell</module>
         <module>spring-boot-aop</module>
+        <module>spring-boot-transaction</module>
     </modules>
 
     <parent>
