@@ -21,7 +21,6 @@
         <module>spring-boot-starter-homemade</module>
         <module>spring-boot-conf</module>
         <module>spring-boot-security</module>
-        <module>spring-base</module>
         <module>spring-boot-test</module>
         <module>spring-boot-vue</module>
         <module>spring-boot-cassandra</module>
@@ -31,6 +30,7 @@
         <module>spring-boot-netty</module>
         <module>spring-boot-mina</module>
         <module>spring-boot-shell</module>
+        <module>spring-boot-aop</module>
     </modules>
 
     <parent>
@@ -39,7 +39,6 @@
         <version>2.3.0.RELEASE</version>
     </parent>
 
-
     <dependencies>
         <!--        代码简化工具-->
         <dependency>
@@ -47,20 +46,16 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-
         <!-- Test dependencies -->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
     </dependencies>
 
     <build>
