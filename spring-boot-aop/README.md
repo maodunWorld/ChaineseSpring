@@ -25,10 +25,11 @@ after Returning
 - Introduction:简介, 定义AOP的唯一ID
 - Target object: 目标对象，理解为Advice + Join Point + PointCut。
 - AOP proxy：默认为JDK动态代理。
-- Weaving：编制，理解为最后AOP字节码生成过程。
+- Weaving：编织，理解为最后AOP字节码生成过程。(ApectJ 原生是通过编译时候编织。Spring中是动态时编译，也就是运行时编译，核心技术是动态代理，默认是jdk动态代理)
 
 
 # 参考资料
+[AOP详解](https://zhuanlan.zhihu.com/p/25522841)   
 [AOP基本概念](https://www.jianshu.com/p/e6909b4e5d11)  
 [Spring AOP官方DOC](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#aop-introduction-defn)    
 [AOP SpringBoot 参考](https://juejin.im/post/6844903766035005453)  
