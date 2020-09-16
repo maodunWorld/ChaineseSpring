@@ -17,7 +17,6 @@
         <module>spring-boot-actuator</module>
         <module>spring-boot-protobuf</module>
         <module>spring-boot-elasticsearch</module>
-        <module>spring-cloud-alibaba</module>
         <module>spring-boot-starter-homemade</module>
         <module>spring-boot-conf</module>
         <module>spring-boot-security</module>
@@ -32,6 +31,10 @@
         <module>spring-boot-shell</module>
         <module>spring-boot-aop</module>
         <module>spring-boot-transaction</module>
+        <module>spring-boot-cache</module>
+        <module>spring-boot-redisson</module>
+        <module>spring-boot-nacos-config</module>
+        <module>spring-boot-nacos-discover</module>
     </modules>
 
     <parent>
