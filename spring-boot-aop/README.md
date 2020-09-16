@@ -2,8 +2,7 @@
 ## 术语解释
 - Aspect: 方面，是一个描述AOP行为的文档，可以是基于@Aspect注解的Java类，或者基于XML AOP Spring配置文件。 体现为java代码如下
 ```java
-@Aspect
-@Configuration
+@Component
 public class AopWithAnnatation {
    
 }
@@ -31,7 +30,8 @@ after Returning
 # 参考资料
 [AOP基本概念](https://www.jianshu.com/p/e6909b4e5d11)  
 [Spring AOP官方DOC](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#aop-introduction-defn)    
-[aspect关键字](https://my.oschina.net/itblog/blog/208067)    
+[AOP SpringBoot 参考](https://juejin.im/post/6844903766035005453)  
+[aspect关键字](https://my.oschina.net/itblog/blog/208067)      
 [aop advice 执行顺序](https://juejin.im/post/6844903969433583624)   
 [PointCut Aspect编程指南](https://www.eclipse.org/aspectj/doc/released/progguide/index.html)  
 [PointCut Aspect5开发人员笔记](https://www.eclipse.org/aspectj/doc/released/adk15notebook/index.html)

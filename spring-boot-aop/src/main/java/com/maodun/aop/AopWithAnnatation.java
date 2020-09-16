@@ -17,7 +17,6 @@ import java.lang.reflect.Method;
  */
 @Aspect
 @Component
-//@Configuration
 public class AopWithAnnatation {
     @Pointcut("@annotation(com.maodun.ant.Action)")
     public void annatationPointCut() {
