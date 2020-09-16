@@ -3,6 +3,7 @@
 - Aspect: 方面，是一个描述AOP行为的文档，可以是基于@Aspect注解的Java类，或者基于XML AOP Spring配置文件。 体现为java代码如下
 ```java
 @Component
+@Aspect
 public class AopWithAnnatation {
    
 }
