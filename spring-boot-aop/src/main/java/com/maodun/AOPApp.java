@@ -21,6 +21,6 @@ public class AOPApp implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        demoService.demo();
+        System.out.println(demoService.demo2("--sdf"));
     }
 }
