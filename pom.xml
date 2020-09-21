@@ -35,7 +35,7 @@
         <module>spring-boot-redisson</module>
         <module>spring-boot-nacos-config</module>
         <module>spring-boot-nacos-discover</module>
-        <module>spring-boot-geode-cache</module>
+        <module>spring-boot-geode-crud</module>
         <module>spring-boot-spel</module>
     </modules>
 
