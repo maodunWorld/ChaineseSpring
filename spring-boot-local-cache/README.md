@@ -2,10 +2,13 @@
 # 直接使用最强本地缓存 caffeine
 * 依赖以及JavaConf
 # 缓存功能的启动
+```java
+@EnableCaching
+```
 # 注解使用
 
 # 自定义注解
-# JSR-107 注解使用
+# JSR-107 注解使用 (建议不要与Spring的注解混用)
 
 
 
