@@ -31,10 +31,11 @@
         <module>spring-boot-shell</module>
         <module>spring-boot-aop</module>
         <module>spring-boot-transaction</module>
-        <module>spring-boot-cache</module>
+        <module>spring-boot-local-cache</module>
         <module>spring-boot-redisson</module>
         <module>spring-boot-nacos-config</module>
         <module>spring-boot-nacos-discover</module>
+        <module>spring-boot-geode-cache</module>
     </modules>
 
     <parent>
