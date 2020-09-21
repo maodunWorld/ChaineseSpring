@@ -51,6 +51,11 @@ spring:
         }
     }
 ```
+```yaml
+spring:
+  cache:
+    type: caffeine
+```
 # 缓存功能的开关
 ## 开
 ```java
