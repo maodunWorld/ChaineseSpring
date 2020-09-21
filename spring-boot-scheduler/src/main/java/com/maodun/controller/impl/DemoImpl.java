@@ -1,6 +1,6 @@
-package com.maodun.service.impl;
+package com.maodun.controller.impl;
 
-import com.maodun.service.Demo;
+import com.maodun.controller.Demo;
 import org.springframework.stereotype.Service;
 
 /**

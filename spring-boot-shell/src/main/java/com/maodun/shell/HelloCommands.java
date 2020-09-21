@@ -1,6 +1,6 @@
 package com.maodun.shell;
 
-import com.maodun.service.Demo;
+import com.maodun.controller.Demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;

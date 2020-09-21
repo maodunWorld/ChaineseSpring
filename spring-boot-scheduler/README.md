@@ -28,8 +28,8 @@
 ```
 * 关于Job的自动注入，一种是用@Autowired，一种是构造函数。
 ```java
-import com.maodun.service.Demo;
-import com.maodun.service.Demo2;
+import com.maodun.controller.Demo;
+import com.maodun.controller.Demo2;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;

@@ -1,6 +1,4 @@
-package com.maodun.service;
-
-import org.springframework.stereotype.Service;
+package com.maodun.controller;
 
 /**
  * @author tongjian

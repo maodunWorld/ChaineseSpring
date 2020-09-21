@@ -20,11 +20,11 @@ public class AopWithAnnatation {
     public void annatationPointCut() {
     }
 
-    @Pointcut(value = "execution(* com.maodun.service.DemoService.demo2(*))")
+    @Pointcut(value = "execution(* com.maodun.controller.DemoService.demo2(*))")
     public void demo2Aop() {
     }
 
-    @Before("execution(* com.maodun.service.*.*(..))")
+    @Before("execution(* com.maodun.controller.*.*(..))")
     public void before(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
