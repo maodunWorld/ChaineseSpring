@@ -22,4 +22,7 @@ public class DemoService {
         return str;
     }
 
+    public String demo3() {
+        return "hello";
+    }
 }

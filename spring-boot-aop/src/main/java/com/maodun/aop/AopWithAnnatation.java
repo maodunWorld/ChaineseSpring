@@ -16,12 +16,18 @@ import java.lang.reflect.Method;
 @Aspect
 @Component
 public class AopWithAnnatation {
+    private static boolean trigger = true;
+
     @Pointcut("@annotation(com.maodun.ant.Action)")
     public void annatationPointCut() {
     }
 
     @Pointcut(value = "execution(* com.maodun.controller.DemoService.demo2(*))")
     public void demo2Aop() {
+    }
+
+    @Pointcut(value = "execution(* com.maodun.controller.DemoService.demo3())")
+    public void demo3() {
     }
 
     @Before("execution(* com.maodun.controller.*.*(..))")
@@ -39,12 +45,14 @@ public class AopWithAnnatation {
         return "this after aop";
     }
 
-//    @Before("demo2Aop()")
-//    public void beforeDemo2(JoinPoint joinPoint) {
-//        Object[] args = joinPoint.getArgs();
-//        System.out.println(args[0]);
-//        args[0] = "this aop before";
-//    }
+    @Around("demo3()")
+    public Object test(ProceedingJoinPoint point) throws Throwable {
+        Object proceed = point.proceed();
+        if (false) {
+            return "test1";
+        }
+        return proceed;
+    }
 
     @After("annatationPointCut()")
     public void after(JoinPoint joinPoint) {
