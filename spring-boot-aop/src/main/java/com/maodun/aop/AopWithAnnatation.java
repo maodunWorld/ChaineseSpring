@@ -16,7 +16,6 @@ import java.lang.reflect.Method;
 @Aspect
 @Component
 public class AopWithAnnatation {
-    private static boolean trigger = true;
 
     @Pointcut("@annotation(com.maodun.ant.Action)")
     public void annatationPointCut() {
@@ -48,7 +47,7 @@ public class AopWithAnnatation {
     @Around("demo3()")
     public Object test(ProceedingJoinPoint point) throws Throwable {
         Object proceed = point.proceed();
-        if (false) {
+        if (true) {
             return "test1";
         }
         return proceed;
