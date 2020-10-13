@@ -20,9 +20,7 @@ public class JwtUtil {
         Calendar instance = Calendar.getInstance();
         instance.add(Calendar.DATE, 7);
         JWTCreator.Builder builder = JWT.create();
-        claim.forEach((k, v) -> {
-            builder.withClaim(k, v);
-        });
+        claim.forEach((k, v) -> builder.withClaim(k, v));
         String sign = builder.withExpiresAt(instance.getTime())
                 .sign(Algorithm.HMAC256(SING));
         return sign;
