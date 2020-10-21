@@ -20,7 +20,7 @@ import java.util.Date;
 @Data
 // 代表pojo对应一个Mongo表 collection = "指定表名字" collation = "指定排序方式"
 @Document
-public class TestDoc {
+public class    TestDoc {
     // @Id 映射为mongodb默认字段 _id
     private String id;
 

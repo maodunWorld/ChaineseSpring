@@ -1,18 +1,33 @@
-package com.maodun;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.io.IOException;
-
-/**
- * @author tongjian
- * @date 2020/6/3 8:59
- */
+# 前端
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+<div id="app">
+    <el-upload
+            action="https://jsonplaceholder.typicode.com/posts/">
+        <el-button size="small" type="primary">点击上传</el-button>
+    </el-upload>
+</div>
+</body>
+<!-- import Vue before Element -->
+<script src="./js/vue.js"></script>
+<!-- import JavaScript -->
+<script src="./js/index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+    })
+</script>
+</html>
+```
+# 后端
+```java
 @SpringBootApplication
 @RestController
 public class VueApp {
@@ -41,3 +56,4 @@ public class VueApp {
         return newFile.getAbsolutePath();
     }
 }
+```
