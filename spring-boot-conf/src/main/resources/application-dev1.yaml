@@ -8,6 +8,8 @@ my:
     - dev.example.com
     - another.example.com
 
+caster:
+  host: test
 robot:
   id: 301
   interval:
@@ -19,3 +21,13 @@ robot:
     persons: 531472181
   server:
     ip: http://172.19.104.247:8182/inspection/pushing
+
+backpresure:
+  list:
+    - kafkasensors:
+      - groupid: test
+        topic: test
+        maxqueuesize: 1111
+      ratelimitkey: testkey
+      ratelimit: 1000
+      flowname: testName

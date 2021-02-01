@@ -14,7 +14,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @date 2020/5/15 13:56
  */
 @SpringBootApplication
-@EnableConfigurationProperties({ConfDemo.class, ServersConf.class, RobotProperties.class})
+@EnableConfigurationProperties({ConfDemo.class, ServersConf.class, RobotProperties.class, BackPresureConf.class})
 @Slf4j
 public class ConfApp implements CommandLineRunner {
 
@@ -30,9 +30,14 @@ public class ConfApp implements CommandLineRunner {
     @Autowired
     private RobotProperties robotProperties;
 
+    @Autowired
+    private BackPresureConf backPresureConf;
 
     @Autowired
     private ConfDemo confDemo;
+
+    @Value("${caster.host}")
+    private String host;
 
     public static void main(String[] args) {
         SpringApplication.run(ConfApp.class).close();
@@ -44,7 +49,7 @@ public class ConfApp implements CommandLineRunner {
 //        log.info("get --------" + name);
 //        log.info("this is appName: " + appName);
 //        log.info(confDemo.toString());
-        System.out.println(robotProperties.toString());
+        System.out.println(host);
 //        serversConf.getServers().forEach(System.out::println);
 
 
