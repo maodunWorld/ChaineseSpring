@@ -3,3 +3,4 @@ spring:
     caffeine:
       spec: maximumSize=500,expireAfterAccess=600s
     type: caffeine
+    cache-names: test
