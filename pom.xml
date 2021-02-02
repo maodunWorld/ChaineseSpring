@@ -38,6 +38,7 @@
         <module>spring-boot-geode-crud</module>
         <module>spring-boot-spel</module>
         <module>spring-boot-embed-database</module>
+        <module>spring-boot-event-listener</module>
     </modules>
 
     <parent>
