@@ -22,9 +22,14 @@ public class EventAndListenerApp implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        MyEvent myEvent = new MyEvent("");
+        MyEvent myEvent = new MyEvent(this);
         myEvent.setMsg("hello");
         applicationEventPublisher.publishEvent(myEvent);
+        applicationEventPublisher.publishEvent(myEvent);
+        MyEvent event = new MyEvent(this);
+        event.setMsg("kjk");
+        applicationEventPublisher.publishEvent(event);
+
     }
 
 
