@@ -24,18 +24,23 @@ public class EventAndListenerApp implements CommandLineRunner {
     public void run(String... args) throws Exception {
         MyEvent myEvent = new MyEvent(this);
         myEvent.setMsg("hello");
+        MyEventTwo myEventTwo = new MyEventTwo(this);
+        myEventTwo.setMsg("kji");
+        applicationEventPublisher.publishEvent(myEventTwo);
         applicationEventPublisher.publishEvent(myEvent);
-        applicationEventPublisher.publishEvent(myEvent);
-        MyEvent event = new MyEvent(this);
-        event.setMsg("kjk");
-        applicationEventPublisher.publishEvent(event);
 
     }
 
 
-    @EventListener(classes = MyEvent.class)
-    public void testLinstener(MyEvent myEvent) {
-        System.out.println(myEvent.getMsg());
+    @EventListener(classes = {MyEvent.class, MyEventTwo.class})
+    public void testLinstener(Object event) {
+        if (event instanceof MyEvent) {
+            MyEvent event1 = (MyEvent) event;
+            System.out.println(event1.getMsg());
+        } else if (event instanceof MyEventTwo) {
+            MyEventTwo event1 = (MyEventTwo) event;
+            System.out.println(event1.getMsg());
+        }
     }
 }
 

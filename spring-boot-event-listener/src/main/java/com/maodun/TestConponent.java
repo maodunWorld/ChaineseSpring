@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * @author tongjian
  * @date 2021/2/2 14:38
  */
-@Component
+//@Component
 public class TestConponent {
     @EventListener(classes = MyEvent.class)
     public void testLinstener(MyEvent myEvent) {
